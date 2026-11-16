@@ -14,17 +14,21 @@ const Customer = mongoose.model('Customer', new mongoose.Schema({
   name: String,
   mobile: String,
   address: String,
+  purpose: { type: String, enum: ['alarm', 'debt', 'both'], default: 'alarm' },
+  debt: { type: Number, default: 0 },                       // pending amount
+  payments: [{ _id: false, id: String, date: String, amount: Number, method: String, type: String }],
   discount: { type: Number, default: 0 },
   medicines: [{ _id: false, name: String, qty: Number }],
-  startDate: String,      // YYYY-MM-DD
+  startDate: String,
   days: Number,
-  deliveryDate: String,   // YYYY-MM-DD
+  deliveryDate: String,
   alarmOn: { type: Boolean, default: true },
-  alarms: [{ _id: false, date: String, time: String }],   // manual alarms
-  autoRenew: { type: Boolean, default: false },            // repeat cycle
+  alarms: [{ _id: false, date: String, time: String }],
+  autoRenew: { type: Boolean, default: false },
   deleted: { type: Boolean, default: false },
   updatedAt: { type: Number, default: 0 }
 }));
+
 
 app.get('/api/health', (_, res) => res.json({ ok: true }));
 
