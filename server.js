@@ -14,6 +14,7 @@ const Customer = mongoose.model('Customer', new mongoose.Schema({
   name: String,
   mobile: String,
   address: String,
+  discount: { type: Number, default: 0 },
   medicines: [{ _id: false, name: String, qty: Number }],
   startDate: String,      // YYYY-MM-DD
   days: Number,
